@@ -1,0 +1,563 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  :root {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --radius: 0.5rem;
+    
+    /* Cyberpunk Neon Colors */
+    --neon-cyan: 180 100% 50%;
+    --neon-pink: 320 100% 50%;
+    --neon-purple: 280 100% 50%;
+    --neon-green: 120 100% 50%;
+    --neon-blue: 240 100% 50%;
+    --neon-orange: 30 100% 50%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background: radial-gradient(ellipse at bottom, #0d1117 0%, #010409 100%);
+    min-height: 100vh;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Cyberpunk Grid Background */
+  .cyberpunk-grid {
+    background-image: 
+      linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    position: relative;
+  }
+  
+  .cyberpunk-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+    pointer-events: none;
+  }
+
+  /* Neon Glow Effects */
+  .neon-glow-cyan {
+    text-shadow: 
+      0 0 5px hsl(var(--neon-cyan)),
+      0 0 10px hsl(var(--neon-cyan)),
+      0 0 15px hsl(var(--neon-cyan)),
+      0 0 20px hsl(var(--neon-cyan));
+  }
+  
+  .neon-glow-pink {
+    text-shadow: 
+      0 0 5px hsl(var(--neon-pink)),
+      0 0 10px hsl(var(--neon-pink)),
+      0 0 15px hsl(var(--neon-pink)),
+      0 0 20px hsl(var(--neon-pink));
+  }
+  
+  .neon-glow-purple {
+    text-shadow: 
+      0 0 5px hsl(var(--neon-purple)),
+      0 0 10px hsl(var(--neon-purple)),
+      0 0 15px hsl(var(--neon-purple)),
+      0 0 20px hsl(var(--neon-purple));
+  }
+
+  /* Neon Border Effects */
+  .neon-border-cyan {
+    border: 1px solid hsl(var(--neon-cyan));
+    box-shadow: 
+      0 0 5px hsl(var(--neon-cyan)),
+      inset 0 0 5px hsl(var(--neon-cyan));
+  }
+  
+  .neon-border-pink {
+    border: 1px solid hsl(var(--neon-pink));
+    box-shadow: 
+      0 0 5px hsl(var(--neon-pink)),
+      inset 0 0 5px hsl(var(--neon-pink));
+  }
+
+  /* Glitch Effects */
+  .glitch {
+    position: relative;
+    color: white;
+    font-weight: bold;
+    animation: glitch-skew 1s infinite linear alternate-reverse;
+  }
+  
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .glitch::before {
+    animation: glitch-anim 0.3s infinite linear alternate-reverse;
+    color: hsl(var(--neon-cyan));
+    z-index: -1;
+  }
+  
+  .glitch::after {
+    animation: glitch-anim2 0.3s infinite linear alternate-reverse;
+    color: hsl(var(--neon-pink));
+    z-index: -2;
+  }
+
+  /* Holographic Effect */
+  .holographic {
+    background: linear-gradient(
+      45deg,
+      hsl(var(--neon-cyan)),
+      hsl(var(--neon-purple)),
+      hsl(var(--neon-pink)),
+      hsl(var(--neon-cyan))
+    );
+    background-size: 400% 400%;
+    animation: holographic-shift 3s ease-in-out infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Cyberpunk Button */
+  .cyber-button {
+    background: transparent;
+    border: 2px solid hsl(var(--neon-cyan));
+    color: hsl(var(--neon-cyan));
+    padding: 12px 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .cyber-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--neon-cyan) / 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+  
+  .cyber-button:hover::before {
+    left: 100%;
+  }
+  
+  .cyber-button:hover {
+    box-shadow: 
+      0 0 10px hsl(var(--neon-cyan)),
+      inset 0 0 10px hsl(var(--neon-cyan) / 0.1);
+  }
+
+  /* Scanning Line Effect */
+  .scan-lines {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .scan-lines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 255, 0.03) 2px,
+      rgba(0, 255, 255, 0.03) 4px
+    );
+    pointer-events: none;
+  }
+
+  /* Matrix Rain Effect */
+  .matrix-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .matrix-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(1px 1px at 20px 30px, hsl(var(--neon-green)), transparent),
+      radial-gradient(1px 1px at 40px 70px, hsl(var(--neon-green)), transparent),
+      radial-gradient(1px 1px at 90px 40px, hsl(var(--neon-green)), transparent);
+    background-repeat: repeat;
+    background-size: 100px 100px;
+    animation: matrix-fall 20s linear infinite;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(42px, 9999px, 44px, 0);
+    transform: skew(0.85deg);
+  }
+  5% {
+    clip: rect(12px, 9999px, 59px, 0);
+    transform: skew(0.94deg);
+  }
+  10% {
+    clip: rect(70px, 9999px, 105px, 0);
+    transform: skew(0.72deg);
+  }
+  15% {
+    clip: rect(25px, 9999px, 95px, 0);
+    transform: skew(0.68deg);
+  }
+  20% {
+    clip: rect(68px, 9999px, 40px, 0);
+    transform: skew(0.61deg);
+  }
+  25% {
+    clip: rect(95px, 9999px, 15px, 0);
+    transform: skew(0.84deg);
+  }
+  30% {
+    clip: rect(15px, 9999px, 90px, 0);
+    transform: skew(0.93deg);
+  }
+  35% {
+    clip: rect(90px, 9999px, 55px, 0);
+    transform: skew(0.96deg);
+  }
+  40% {
+    clip: rect(10px, 9999px, 85px, 0);
+    transform: skew(0.75deg);
+  }
+  45% {
+    clip: rect(50px, 9999px, 20px, 0);
+    transform: skew(0.67deg);
+  }
+  50% {
+    clip: rect(85px, 9999px, 75px, 0);
+    transform: skew(0.82deg);
+  }
+  55% {
+    clip: rect(20px, 9999px, 50px, 0);
+    transform: skew(0.81deg);
+  }
+  60% {
+    clip: rect(75px, 9999px, 30px, 0);
+    transform: skew(0.87deg);
+  }
+  65% {
+    clip: rect(30px, 9999px, 80px, 0);
+    transform: skew(0.78deg);
+  }
+  70% {
+    clip: rect(80px, 9999px, 45px, 0);
+    transform: skew(0.73deg);
+  }
+  75% {
+    clip: rect(45px, 9999px, 70px, 0);
+    transform: skew(0.69deg);
+  }
+  80% {
+    clip: rect(70px, 9999px, 35px, 0);
+    transform: skew(0.76deg);
+  }
+  85% {
+    clip: rect(35px, 9999px, 65px, 0);
+    transform: skew(0.88deg);
+  }
+  90% {
+    clip: rect(65px, 9999px, 25px, 0);
+    transform: skew(0.91deg);
+  }
+  95% {
+    clip: rect(25px, 9999px, 60px, 0);
+    transform: skew(0.74deg);
+  }
+  100% {
+    clip: rect(60px, 9999px, 42px, 0);
+    transform: skew(0.77deg);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(65px, 9999px, 100px, 0);
+    transform: skew(0.57deg);
+  }
+  5% {
+    clip: rect(25px, 9999px, 45px, 0);
+    transform: skew(0.41deg);
+  }
+  10% {
+    clip: rect(45px, 9999px, 85px, 0);
+    transform: skew(0.34deg);
+  }
+  15% {
+    clip: rect(85px, 9999px, 30px, 0);
+    transform: skew(0.52deg);
+  }
+  20% {
+    clip: rect(30px, 9999px, 70px, 0);
+    transform: skew(0.48deg);
+  }
+  25% {
+    clip: rect(70px, 9999px, 10px, 0);
+    transform: skew(0.38deg);
+  }
+  30% {
+    clip: rect(10px, 9999px, 90px, 0);
+    transform: skew(0.64deg);
+  }
+  35% {
+    clip: rect(90px, 9999px, 50px, 0);
+    transform: skew(0.71deg);
+  }
+  40% {
+    clip: rect(50px, 9999px, 20px, 0);
+    transform: skew(0.43deg);
+  }
+  45% {
+    clip: rect(20px, 9999px, 80px, 0);
+    transform: skew(0.56deg);
+  }
+  50% {
+    clip: rect(80px, 9999px, 40px, 0);
+    transform: skew(0.49deg);
+  }
+  55% {
+    clip: rect(40px, 9999px, 75px, 0);
+    transform: skew(0.62deg);
+  }
+  60% {
+    clip: rect(75px, 9999px, 35px, 0);
+    transform: skew(0.37deg);
+  }
+  65% {
+    clip: rect(35px, 9999px, 95px, 0);
+    transform: skew(0.55deg);
+  }
+  70% {
+    clip: rect(95px, 9999px, 15px, 0);
+    transform: skew(0.46deg);
+  }
+  75% {
+    clip: rect(15px, 9999px, 60px, 0);
+    transform: skew(0.59deg);
+  }
+  80% {
+    clip: rect(60px, 9999px, 25px, 0);
+    transform: skew(0.33deg);
+  }
+  85% {
+    clip: rect(25px, 9999px, 85px, 0);
+    transform: skew(0.63deg);
+  }
+  90% {
+    clip: rect(85px, 9999px, 55px, 0);
+    transform: skew(0.44deg);
+  }
+  95% {
+    clip: rect(55px, 9999px, 65px, 0);
+    transform: skew(0.51deg);
+  }
+  100% {
+    clip: rect(65px, 9999px, 100px, 0);
+    transform: skew(0.58deg);
+  }
+}
+
+@keyframes glitch-skew {
+  0% {
+    transform: skew(2deg);
+  }
+  10% {
+    transform: skew(-1deg);
+  }
+  20% {
+    transform: skew(0deg);
+  }
+  30% {
+    transform: skew(1deg);
+  }
+  40% {
+    transform: skew(-2deg);
+  }
+  50% {
+    transform: skew(0deg);
+  }
+  60% {
+    transform: skew(-1deg);
+  }
+  70% {
+    transform: skew(2deg);
+  }
+  80% {
+    transform: skew(0deg);
+  }
+  90% {
+    transform: skew(1deg);
+  }
+  100% {
+    transform: skew(-1deg);
+  }
+}
+
+@keyframes holographic-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes matrix-fall {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor,
+      0 0 20px currentColor;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+  50% {
+    box-shadow: 
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 30px currentColor;
+  }
+}
+
+/* Utility Classes */
+.animate-neon-flicker {
+  animation: neon-flicker 2s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(var(--neon-cyan)), hsl(var(--neon-purple)));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, hsl(var(--neon-pink)), hsl(var(--neon-cyan)));
+}
+
+/* Selection Styling */
+::selection {
+  background: hsl(var(--neon-cyan) / 0.3);
+  color: white;
+}
+
+::-moz-selection {
+  background: hsl(var(--neon-cyan) / 0.3);
+  color: white;
+}
